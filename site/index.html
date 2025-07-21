@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Builder 64 Level Parser & Serializer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    >
+    <link
+      href="https://cdn.jsdelivr.net/npm/jsoneditor@9.10.0/dist/jsoneditor.min.css"
+      rel="stylesheet"
+    >
+    <script
+      src="https://cdn.jsdelivr.net/npm/jsoneditor@9.10.0/dist/jsoneditor.min.js"
+    ></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <div class="max-w-6xl mx-auto mt-8 p-4 bg-white rounded shadow">
+      <h1 class="text-2xl font-bold mb-4">
+        Mario Builder 64 Level Parser & Serializer
+      </h1>
+      <div class="mb-4 flex border-b">
+        <button
+          id="tab-parse"
+          class="px-4 py-2 font-semibold border-b-2 border-blue-500"
+        >
+          Parse
+        </button>
+        <button
+          id="tab-serialize"
+          class="px-4 py-2 font-semibold text-gray-500"
+        >
+          Serialize
+        </button>
+      </div>
+      <div id="pane-parse">
+        <h2 class="text-lg font-semibold mb-2">Parse .mb64 File</h2>
+        <input type="file" id="mb64-upload" accept=".mb64" class="mb-2" />
+        <div id="parse-error" class="text-red-600 mb-2 hidden"></div>
+        <div
+          id="json-preview"
+          class="bg-gray-50 p-2 rounded overflow-auto text-xs h-64"
+        >
+        </div>
+      </div>
+      <div id="pane-serialize" class="hidden">
+        <h2 class="text-lg font-semibold mb-2">Edit & Serialize Level JSON</h2>
+        <div class="mb-2 flex items-center gap-2">
+          <button
+            id="toggle-json-mode"
+            class="bg-gray-200 px-2 py-1 rounded text-xs"
+          >
+            Switch to Tree/Raw
+          </button>
+          <button
+            id="json-tree-fullscreen"
+            class="bg-gray-200 px-2 py-1 rounded text-xs"
+          >
+            Fullscreen
+          </button>
+          <button id="clear-file" class="bg-red-200 px-2 py-1 rounded text-xs">
+            Clear
+          </button>
+        </div>
+        <div id="json-tree" class="h-[600px] mb-2" style="display: none"></div>
+        <textarea
+          id="json-editor"
+          class="w-full h-64 p-2 border rounded font-mono text-xs mb-2"
+        ></textarea>
+        <div class="flex gap-2 mb-2">
+          <button
+            id="serialize-btn"
+            class="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Download .mb64
+          </button>
+        </div>
+        <div id="serialize-error" class="text-red-600 mb-2 hidden"></div>
+      </div>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
