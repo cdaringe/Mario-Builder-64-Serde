@@ -118,6 +118,10 @@ globalThis.addEventListener("DOMContentLoaded", () => {
     showTab("serialize");
   } else {
     showTab("parse");
+    // Default to tree view
+    showTree({});
+    treeMode = true;
+    toggleJsonModeBtn.textContent = "Switch to Raw";
   }
 });
 
@@ -169,7 +173,7 @@ demoBtn.onclick = async () => {
 };
 
 let jsonTreeEditor: any = null;
-let treeMode = false;
+let treeMode = true;
 
 function showTree(json: any) {
   if (!jsonTreeEditor) {
