@@ -8,7 +8,6 @@ const tabParse = document.getElementById("tab-parse")!;
 const tabSerialize = document.getElementById("tab-serialize")!;
 const paneParse = document.getElementById("pane-parse")!;
 const paneSerialize = document.getElementById("pane-serialize")!;
-const jsonPreview = document.getElementById("json-preview")!;
 const jsonEditor = document.getElementById("json-editor")!;
 const parseError = document.getElementById("parse-error")!;
 const serializeError = document.getElementById("serialize-error")!;
@@ -42,7 +41,6 @@ mb64Upload.onchange = handleMb64Upload;
 
 async function handleMb64Upload(_e: Event) {
   parseError.classList.add("hidden");
-  jsonPreview.textContent = "";
   const file = mb64Upload.files?.[0];
   if (!file) return;
   try {
@@ -53,7 +51,6 @@ async function handleMb64Upload(_e: Event) {
       (_k, v) => typeof v === "bigint" ? v.toString() : v,
       2,
     );
-    jsonPreview.textContent = jsonStr;
     jsonEditor.value = jsonStr;
     persistFile(file.name, jsonStr, new Uint8Array(buf));
     if (treeMode) showTree(json);
@@ -152,7 +149,6 @@ serializeBtn.onclick = () => {
 const demoBtn = document.getElementById("demo-btn")!;
 demoBtn.onclick = async () => {
   parseError.classList.add("hidden");
-  jsonPreview.textContent = "";
   try {
     const res = await fetch("abc.mb64");
     const buf = await res.arrayBuffer();
@@ -162,7 +158,6 @@ demoBtn.onclick = async () => {
       (_k, v) => typeof v === "bigint" ? v.toString() : v,
       2,
     );
-    jsonPreview.textContent = jsonStr;
     jsonEditor.value = jsonStr;
     persistFile("abc.mb64", jsonStr, new Uint8Array(buf));
     if (treeMode) showTree(json);
@@ -191,6 +186,7 @@ function showTree(json: any) {
   jsonTreeEditor.set(json);
   jsonTreeDiv.style.display = "block";
   jsonEditor.style.display = "none";
+  jsonTreeFullscreenBtn.style.display = "inline-block";
 }
 function showRaw(jsonStr: string) {
   jsonTreeDiv.style.display = "none";
@@ -200,6 +196,7 @@ function showRaw(jsonStr: string) {
       jsonTreeEditor.set(JSON.parse(jsonStr));
     } catch {}
   }
+  jsonTreeFullscreenBtn.style.display = "none";
 }
 toggleJsonModeBtn.onclick = () => {
   treeMode = !treeMode;

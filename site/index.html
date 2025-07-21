@@ -18,8 +18,26 @@
   </head>
   <body class="bg-gray-100 min-h-screen">
     <div class="max-w-6xl mx-auto mt-8 p-4 bg-white rounded shadow">
-      <h1 class="text-2xl font-bold mb-4">
-        Mario Builder 64 Level Parser & Serializer
+      <h1 class="text-2xl font-bold mb-4 flex items-center gap-2 justify-between">
+        <span class="flex items-center gap-2">
+          <svg viewBox="0 0 32 32" width="32" height="32" class="inline-block align-middle" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hat -->
+            <rect x="8" y="4" width="16" height="6" fill="#e63946" />
+            <!-- Face -->
+            <rect x="8" y="10" width="16" height="12" fill="#f8e9c1" />
+            <!-- Eyes -->
+            <rect x="12" y="14" width="2" height="2" fill="#2d3142" />
+            <rect x="18" y="14" width="2" height="2" fill="#2d3142" />
+            <!-- Mustache -->
+            <rect x="12" y="18" width="8" height="2" fill="#2d3142" />
+            <!-- Body -->
+            <rect x="10" y="22" width="12" height="6" fill="#457b9d" />
+          </svg>
+          Mario Builder 64 Level Parser & Serializer
+        </span>
+        <a href="https://github.com/cdaringe/Mario-Builder-64-Serde" target="_blank" rel="noopener" class="ml-4">
+          <img src="gh.png" alt="GitHub" class="h-8 w-8">
+        </a>
       </h1>
       <div class="mb-4 flex border-b">
         <button
@@ -41,11 +59,6 @@
         <button id="demo-btn" class="bg-green-500 text-xs text-white px-2 py-1 rounded mt-1 mb-2">Demo</button>
         <button id="clear-file-parse" class="bg-red-200 text-xs rounded px-2 py-1 mb-2">Clear</button>
         <div id="parse-error" class="text-red-600 mb-2 hidden"></div>
-        <div
-          id="json-preview"
-          class="bg-gray-50 p-2 rounded overflow-auto text-xs h-64"
-        >
-        </div>
       </div>
       <div id="pane-serialize" class="hidden">
         <h2 class="text-lg font-semibold mb-2">Edit & Serialize Level JSON</h2>
