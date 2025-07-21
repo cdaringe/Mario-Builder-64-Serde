@@ -2,10 +2,15 @@
   "name": "@cdaringe/mario-builder-64-serde",
   "version": "0.1.0",
   "license": "MIT",
-  "exports": "./src/mod.ts",
+  "exports": {
+    "./v1.1": "./src/v1.1/mod.ts"
+  },
   "fmt": {
     "exclude": [
       "Mario-Builder-64"
     ]
+  },
+  "tasks": {
+    "test": "deno test --allow-read --allow-write"
   }
 }
