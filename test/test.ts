@@ -1,9 +1,10 @@
-import { parseMb64 } from "./parser.ts";
-import { serializeMb64 } from "./serializer.ts";
+import { parseMb64 } from "../src/parser.ts";
+import { serializeMb64 } from "../src/serializer.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 
+const fixturesDirname = join(import.meta.dirname ?? ".", "fixtures");
 Deno.test("parse and serialize lvl.mb64 matches original", async () => {
-  const filePath = join(import.meta.dirname ?? ".", "abc.mb64");
+  const filePath = join(fixturesDirname, "abc.mb64");
   const original = await Deno.readFile(filePath);
   const json = parseMb64(original);
 
