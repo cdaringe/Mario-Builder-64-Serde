@@ -10,4 +10,4 @@ We support two usage modes:
 
 1. Website. See GitHub Pages at
    https://cdaringe.github.io/Mario-Builder-64-Serde/
-2. Deno module.
+2. Deno module: https://jsr.io/@cdaringe/mario-builder-64-serde
