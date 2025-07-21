@@ -28,10 +28,12 @@ jobs:
         run: |
           cd site
           bash build.sh
-      - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site directory
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: site
           path: site
-      - name: Publish package
-        run: deno publish || true
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
