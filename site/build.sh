@@ -20,6 +20,7 @@ echo "Bundle complete: $denobundle"
 
 # Optionally, copy static assets (if any) here
 # Example: cp -r assets/ dist/assets/
+cp ../test/fixtures/abc.mb64 abc.mb64
 
 # Print success message
 echo "Build finished. Site is ready in $(pwd)"

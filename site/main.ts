@@ -20,16 +20,16 @@ function showTab(tab: "parse" | "serialize") {
   if (tab === "parse") {
     paneParse.classList.remove("hidden");
     paneSerialize.classList.add("hidden");
-    tabParse.classList.add("border-blue-500");
+    tabParse.classList.add("border-b-2", "border-blue-500");
     tabParse.classList.remove("text-gray-500");
-    tabSerialize.classList.remove("border-blue-500");
+    tabSerialize.classList.remove("border-b-2", "border-blue-500");
     tabSerialize.classList.add("text-gray-500");
   } else {
     paneParse.classList.add("hidden");
     paneSerialize.classList.remove("hidden");
-    tabSerialize.classList.add("border-blue-500");
+    tabSerialize.classList.add("border-b-2", "border-blue-500");
     tabSerialize.classList.remove("text-gray-500");
-    tabParse.classList.remove("border-blue-500");
+    tabParse.classList.remove("border-b-2", "border-blue-500");
     tabParse.classList.add("text-gray-500");
   }
 }
@@ -66,6 +66,7 @@ async function handleMb64Upload(_e: Event) {
 
 // --- Persistence & Clear logic ---
 const clearFileBtn = document.getElementById("clear-file")!;
+const clearFileParseBtn = document.getElementById("clear-file-parse")!;
 const FILE_KEY = "mb64_file";
 const JSON_KEY = "mb64_json";
 const FILENAME_KEY = "mb64_filename";
@@ -100,6 +101,7 @@ function clearPersistedFile() {
   showTab("parse");
 }
 clearFileBtn.onclick = clearPersistedFile;
+clearFileParseBtn.onclick = clearPersistedFile;
 
 // On page load, restore file if present
 globalThis.addEventListener("DOMContentLoaded", () => {
@@ -144,6 +146,30 @@ serializeBtn.onclick = () => {
   } catch (err) {
     serializeError.textContent = err.message || String(err);
     serializeError.classList.remove("hidden");
+  }
+};
+
+const demoBtn = document.getElementById("demo-btn")!;
+demoBtn.onclick = async () => {
+  parseError.classList.add("hidden");
+  jsonPreview.textContent = "";
+  try {
+    const res = await fetch("abc.mb64");
+    const buf = await res.arrayBuffer();
+    const json = parseMb64(new Uint8Array(buf));
+    const jsonStr = JSON.stringify(
+      json,
+      (_k, v) => typeof v === "bigint" ? v.toString() : v,
+      2,
+    );
+    jsonPreview.textContent = jsonStr;
+    jsonEditor.value = jsonStr;
+    persistFile("abc.mb64", jsonStr, new Uint8Array(buf));
+    if (treeMode) showTree(json);
+    showTab("serialize");
+  } catch (err) {
+    parseError.textContent = err.message || String(err);
+    parseError.classList.remove("hidden");
   }
 };
 
