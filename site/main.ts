@@ -1,7 +1,7 @@
 // Entry point for Mario Builder 64 Level Parser & Serializer static site
 // Uses Deno-bundled TypeScript, loaded as main.js
-import { parseMb64 } from "../src/parser.ts";
-import { serializeMb64 } from "../src/serializer.ts";
+import { parseMb64 } from "../src/v1_1/parser.ts";
+import { serializeMb64 } from "../src/v1_1/serializer.ts";
 
 // Tab logic
 const tabParse = document.getElementById("tab-parse")!;
