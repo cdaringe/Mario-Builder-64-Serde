@@ -114,7 +114,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
   const theme = reverseMap(ThemeTypeMap, themeNum);
 
   const bgNum = readU8(view, offsetRef);
-  const bg = reverseMap(BgTypeMap, bgNum) ?? bgNum;
+  const bg = reverseMap(BgTypeMap, bgNum);
 
   const boundaryMatNum = readU8(view, offsetRef);
   const boundary_mat = reverseMap(BoundaryMatTypeMap, boundaryMatNum) ??

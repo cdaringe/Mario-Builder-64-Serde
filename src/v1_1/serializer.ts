@@ -114,9 +114,7 @@ export function serializeMb64(level: LevelMB64): Uint8Array {
   offset = writeU8(
     view,
     offset,
-    typeof level.bg === "string" && level.bg in BgTypeMap
-      ? BgTypeMap[level.bg as keyof typeof BgTypeMap]
-      : Number(level.bg),
+    BgTypeMap[level.bg as keyof typeof BgTypeMap]
   );
   offset = writeU8(
     view,

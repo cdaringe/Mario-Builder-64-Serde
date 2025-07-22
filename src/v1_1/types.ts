@@ -177,10 +177,16 @@ export const ThemeTypeMap = {
 export type ThemeType = keyof typeof ThemeTypeMap;
 
 export const BgTypeMap = {
-  DAY: 0,
-  NIGHT: 1,
-  SUNSET: 2,
-  SPACE: 3,
+  OCEAN_HILLS: 0,
+  CLOUDY_SKY: 1,
+  FIERY_SKY: 2,
+  GREEN_CAVE: 3,
+  HAUNTED_FOREST: 4,
+  ICE_MOUNTAINS: 5,
+  DESERT_PYRAMIDS: 6,
+  UNDERWATER_CITY: 7,
+  PINK_SKY: 8,
+  NONE: 9,
 } as const;
 export type BgType = keyof typeof BgTypeMap;
 
