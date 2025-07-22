@@ -7,9 +7,9 @@ import {
   CostumeTypeMap,
   EnvFxTypeMap,
   GameTypeMap,
-  LevelMB64,
+  type LevelMB64,
   LevelSizeTypeMap,
-  MaterialType,
+  type MaterialType,
   MaterialTypeMap,
   SeqTypeMap,
   ThemeTypeMap,
@@ -109,9 +109,7 @@ export function serializeMb64(level: LevelMB64): Uint8Array {
   offset = writeU8(
     view,
     offset,
-    typeof level.theme === "string" && level.theme in ThemeTypeMap
-      ? ThemeTypeMap[level.theme as keyof typeof ThemeTypeMap]
-      : Number(level.theme),
+    ThemeTypeMap[level.theme as keyof typeof ThemeTypeMap]
   );
   offset = writeU8(
     view,

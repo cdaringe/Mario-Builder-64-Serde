@@ -1,4 +1,4 @@
-import { OffsetRef, tileToU32 } from "./common.ts";
+import { type OffsetRef, tileToU32 } from "./common.ts";
 import { log } from "./logger.ts";
 import {
   BgTypeMap,
@@ -7,18 +7,18 @@ import {
   CostumeTypeMap,
   EnvFxTypeMap,
   GameTypeMap,
-  LevelMB64,
+  type LevelMB64,
   LevelSizeTypeMap,
-  MaterialType,
+  type MaterialType,
   MaterialTypeMap,
-  ObjectMB64,
-  SeqType,
+  type ObjectMB64,
+  type SeqType,
   SeqTypeMap,
   ThemeTypeMap,
-  TileMB64,
-  ToolbarType,
+  type TileMB64,
+  type ToolbarType,
   ToolbarTypeMap,
-  TrajectoryTuple,
+  type TrajectoryTuple,
 } from "./types.ts";
 
 function readString(
@@ -72,7 +72,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     buffer.byteOffset,
     buffer.byteLength,
   );
-  let offset = 0;
+  const offset = 0;
 
   const file_header = readString(view, offsetRef, 10);
   const version = readU8(view, offsetRef);
@@ -92,12 +92,12 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     "debug",
     `DIAG parser: +1 eo-piktcher bytes ${offset} (0x${offset.toString(16)})`,
   );
-  let costumeNum = readU8(view, offsetRef);
+  const costumeNum = readU8(view, offsetRef);
   const costume = reverseMap(CostumeTypeMap, costumeNum);
 
   const seq: SeqType[] = [];
   for (let i = 0; i < 5; i++) {
-    let seqNum = readU8(view, offsetRef);
+    const seqNum = readU8(view, offsetRef);
     const seqStr = reverseMap(SeqTypeMap, seqNum);
     if (seqStr === undefined) {
       throw new Error(
@@ -107,44 +107,42 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     seq.push(seqStr);
   }
 
-  let envfxNum = readU8(view, offsetRef);
+  const envfxNum = readU8(view, offsetRef);
   const envfx = reverseMap(EnvFxTypeMap, envfxNum) ?? envfxNum;
 
-  let themeNum = readU8(view, offsetRef);
-  const theme = reverseMap(ThemeTypeMap, themeNum) ?? themeNum;
+  const themeNum = readU8(view, offsetRef);
+  const theme = reverseMap(ThemeTypeMap, themeNum);
 
-  let bgNum = readU8(view, offsetRef);
+  const bgNum = readU8(view, offsetRef);
   const bg = reverseMap(BgTypeMap, bgNum) ?? bgNum;
 
-  let boundaryMatNum = readU8(view, offsetRef);
+  const boundaryMatNum = readU8(view, offsetRef);
   const boundary_mat = reverseMap(BoundaryMatTypeMap, boundaryMatNum) ??
     boundaryMatNum;
 
-  let boundaryNum = readU8(view, offsetRef);
+  const boundaryNum = readU8(view, offsetRef);
   const boundary = reverseMap(BoundaryTypeMap, boundaryNum) ?? boundaryNum;
 
-  let boundary_height = readU8(view, offsetRef);
-  let coinstar = readU8(view, offsetRef);
+  const boundary_height = readU8(view, offsetRef);
+  const coinstar = readU8(view, offsetRef);
 
-  let sizeNum = readU8(view, offsetRef);
+  const sizeNum = readU8(view, offsetRef);
   const size = reverseMap(LevelSizeTypeMap, sizeNum) ?? sizeNum;
 
-  let waterlevel = readU8(view, offsetRef);
-  let secret = readU8(view, offsetRef);
+  const waterlevel = readU8(view, offsetRef);
+  const secret = readU8(view, offsetRef);
 
-  let gameNum = readU8(view, offsetRef);
+  const gameNum = readU8(view, offsetRef);
   log(
     "debug",
-    `DIAG parser: game_num byte: ${offsetRef.current} (0x${
-      offsetRef.current.toString(16)
-    })`,
+    `DIAG parser: game_num byte: ${offsetRef.current} (0x${offsetRef.current.toString(16)})`,
   );
 
   const game = reverseMap(GameTypeMap, gameNum) ?? gameNum;
 
   const toolbar: ToolbarType[] = [];
   for (let i = 0; i < 9; i++) {
-    let tbNum = readU8(view, offsetRef);
+    const tbNum = readU8(view, offsetRef);
     const tbStr = reverseMap(ToolbarTypeMap, tbNum);
     if (tbStr === undefined) {
       throw new Error(
@@ -155,14 +153,13 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
   }
   const toolbar_params: number[] = [];
   for (let i = 0; i < 9; i++) {
-    let tbp = readU8(view, offsetRef);
+    const tbp = readU8(view, offsetRef);
     toolbar_params.push(tbp);
   }
 
-  let _UNEXPLAINABLE_BYTE = readU8(view, offsetRef);
-
-  let tile_count = readU16(view, offsetRef);
-  let object_count = readU16(view, offsetRef);
+  const _UNEXPLAINABLE_BYTE = readU8(view, offsetRef);
+  const tile_count = readU16(view, offsetRef);
+  const object_count = readU16(view, offsetRef);
 
   log(
     "debug",
@@ -175,7 +172,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
   const topmats: MaterialType[] = [];
   const topmatsEnabled: MaterialType[] = [];
   for (let i = 0; i < 10; i++) {
-    let v = readU8(view, offsetRef);
+    const v = readU8(view, offsetRef);
     const matStr = reverseMap(MaterialTypeMap, Number(v));
     if (matStr === undefined) {
       throw new Error(
@@ -185,7 +182,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     mats.push(matStr || v);
   }
   for (let i = 0; i < 10; i++) {
-    let v = readU8(view, offsetRef);
+    const v = readU8(view, offsetRef);
     const matStr = reverseMap(MaterialTypeMap, Number(v));
     if (matStr === undefined) {
       throw new Error(
@@ -195,7 +192,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     topmats.push(matStr);
   }
   for (let i = 0; i < 10; i++) {
-    let v = readU8(view, offsetRef);
+    const v = readU8(view, offsetRef);
     const matStr = reverseMap(MaterialTypeMap, Number(v));
     if (matStr === undefined) {
       throw new Error(
@@ -204,21 +201,21 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     }
     topmatsEnabled.push(matStr);
   }
-  let fence = readU8(view, offsetRef);
+  const fence = readU8(view, offsetRef);
   const fenceStr = reverseMap(MaterialTypeMap, Number(fence));
   if (fenceStr === undefined) {
     throw new Error(
       `custom_theme.fence value (${fence}) does not match any material string. Fix your MaterialTypeMap!`,
     );
   }
-  let pole = readU8(view, offsetRef);
+  const pole = readU8(view, offsetRef);
   const poleStr = reverseMap(MaterialTypeMap, Number(pole));
   if (poleStr === undefined) {
     throw new Error(
       `custom_theme.pole value (${pole}) does not match any material string. Fix your MaterialTypeMap!`,
     );
   }
-  let bars = readU8(view, offsetRef);
+  const bars = readU8(view, offsetRef);
   const barsStr = reverseMap(MaterialTypeMap, Number(bars));
   if (barsStr === undefined) {
     throw new Error(
@@ -226,7 +223,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     );
   }
 
-  let water = readU8(view, offsetRef);
+  const water = readU8(view, offsetRef);
   const waterStr = reverseMap(MaterialTypeMap, Number(water));
   if (waterStr === undefined) {
     throw new Error(
@@ -249,7 +246,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
   }
 
   // Read pad
-  let padBigInt = readU64(view, offsetRef);
+  const padBigInt = readU64(view, offsetRef);
   const pad = Number(padBigInt);
 
   // account for ghost pad bytes
@@ -298,7 +295,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
   const objectsStartOffset = offset;
   const objects: ObjectMB64[] = [];
   for (let i = 0; i < object_count; i++) {
-    let bparam = readU8(view, offsetRef);
+    const bparam = readU8(view, offsetRef);
     const x = readU8(view, offsetRef);
     const y = readU8(view, offsetRef);
     const z = readU8(view, offsetRef);
@@ -331,7 +328,6 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     file_header,
     version,
     author,
-    piktcher,
     costume,
     seq,
     envfx,
@@ -360,6 +356,7 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     },
     trajectories,
     pad,
+    piktcher,
     tiles,
     objects,
   };

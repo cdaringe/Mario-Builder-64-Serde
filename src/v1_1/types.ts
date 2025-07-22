@@ -161,12 +161,18 @@ export const EnvFxTypeMap = {
 export type EnvFxType = keyof typeof EnvFxTypeMap;
 
 export const ThemeTypeMap = {
-  GRASS: 0,
-  DESERT: 1,
-  SNOW: 2,
-  CASTLE: 3,
-  CAVE: 4,
-  WATER: 5,
+  GENERIC: 0,
+  SSL: 1,
+  RHR: 2,
+  HMC: 3,
+  CASTLE: 4,
+  VIRTUAPLEX: 5,
+  SNOW: 6,
+  BBH: 7,
+  JRB: 8,
+  RETRO: 9,
+  CUSTOM: 10,
+  MC: 11,
 } as const;
 export type ThemeType = keyof typeof ThemeTypeMap;
 

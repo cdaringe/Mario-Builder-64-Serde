@@ -1,5 +1,5 @@
-import { parseMb64 } from "../../src/v1.1/parser.ts";
-import { serializeMb64 } from "../../src/v1.1/serializer.ts";
+import { parseMb64 } from "../../src/v1_1/parser.ts";
+import { serializeMb64 } from "../../src/v1_1/serializer.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
 
 const fixturesDirname = join(import.meta.dirname ?? ".", "fixtures");
