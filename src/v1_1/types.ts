@@ -13,16 +13,24 @@ export interface LevelMB64 {
   boundary_mat: BoundaryMatType; // [8243] (1 byte)
   boundary: BoundaryType; // [8244] (1 byte)
   boundary_height: number; // [8245] (1 byte)
+  /**
+   * 0 = no coinstar.
+   * >0 = coinstar with that many coins collected
+   */
   coinstar: number; // [8246] (1 byte)
   size: LevelSizeType; // [8247] (1 byte)
   waterlevel: number; // [8248] (1 byte)
+  /**
+   * Activate little secret! 0 = no secret, 1 = secret active.
+   * No other valid values.
+   */
   secret: number; // [8249] (1 byte)
   game: GameType; // [8250] (1 byte)
 
   toolbar: ToolbarType[]; // [8251-8259] (9 bytes)
   toolbar_params: number[]; // [8260-8268] (9 bytes)
-  tile_count: number; // [8269-8270] (2 bytes)
-  object_count: number; // [8271-8272] (2 bytes)
+  // tile_count: number; // [8269-8270] (2 bytes)
+  // object_count: number; // [8271-8272] (2 bytes)
 
   custom_theme: CustomTheme; // [8273-8306] (34 bytes: mats/topmats/topmatsEnabled 10x1 each, fence/pole/bars/water 1 each)
   trajectories: TrajectoryTuple[][]; // [8307-12306] (4000 bytes: 20x50x4)

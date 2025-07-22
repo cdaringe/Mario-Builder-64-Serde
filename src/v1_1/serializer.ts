@@ -167,9 +167,9 @@ export function serializeMb64(level: LevelMB64): Uint8Array {
   assertOffset(offset, 8269, "Offset after toolbar_params");
 
   offset = writeU8(view, offset, 0); // UNEXPLAINABLE BYTE!
-  offset = writeU16(view, offset, level.tile_count);
+  offset = writeU16(view, offset, level.tiles.length);
   assertOffset(offset, 8271 + 1, "Offset after tile_count");
-  offset = writeU16(view, offset, level.object_count);
+  offset = writeU16(view, offset, level.objects.length);
   assertOffset(offset, 8273 + 1, "Offset after object_count");
 
   const customThemeLen = 10; // NUM_MATERIALS_PER_THEME
@@ -256,14 +256,14 @@ export function serializeMb64(level: LevelMB64): Uint8Array {
   log(
     "debug",
     "DIAG serializer: tile_count:",
-    level.tile_count,
+    level.tiles.length,
     "tiles.length:",
     level.tiles.length,
   );
   log(
     "debug",
     "DIAG serializer: object_count:",
-    level.object_count,
+    level.objects.length,
     "objects.length:",
     level.objects.length,
   );

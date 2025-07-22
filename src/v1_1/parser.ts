@@ -343,8 +343,6 @@ export function parseMb64(buffer: Uint8Array): LevelMB64 {
     game,
     toolbar,
     toolbar_params,
-    tile_count,
-    object_count,
     custom_theme: {
       mats,
       topmats,
