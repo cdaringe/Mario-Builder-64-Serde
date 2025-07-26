@@ -15,6 +15,7 @@ We support two usage modes:
 ## Contributing
 
 ```bash
-git clone https://github.com/coop-deluxe/sm64coopdx.git
-git clone https://github.com/rovertronic/Mario-Builder-64.git
+bash \
+  git clone https://github.com/coop-deluxe/sm64coopdx.git \
+  git clone https://github.com/rovertronic/Mario-Builder-64.git
 ```
