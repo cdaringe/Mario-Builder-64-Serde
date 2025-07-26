@@ -1,4 +1,3 @@
-// LevelMB64 interface and enums
 export interface LevelMB64 {
   file_header: string; // [0-9] (10 bytes)
   version: number; // [10] (1 byte)
