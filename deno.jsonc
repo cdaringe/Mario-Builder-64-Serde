@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "exports": {
-    "./v1.1": "./src/v1.1/mod.ts"
+    "./serde/v1_1/": "./src/serde/v1_1/mod.ts"
   },
   "fmt": {
     "exclude": [

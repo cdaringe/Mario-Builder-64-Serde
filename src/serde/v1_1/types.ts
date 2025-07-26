@@ -3,7 +3,6 @@ export interface LevelMB64 {
   version: number; // [10] (1 byte)
   author: string; // [11-41] (31 bytes)
   piktcher: number[][]; // [42-8233] (8192 bytes, 64x64x2)
-
   costume: CostumeType; // [8234] (1 byte)
   seq: SeqType[]; // [8235-8239] (5 bytes)
   envfx: EnvFxType; // [8240] (1 byte)
